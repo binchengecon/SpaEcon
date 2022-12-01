@@ -1,0 +1,9 @@
+==========================================
+SLURM_JOB_ID = 10261048
+SLURM_SUBMIT_DIR = /home/bcheng4/SpaEcon
+SLURM_JOB_NODELIST = mgpu01
+==========================================
+0d:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
+0e:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
+83:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
+84:00.0 3D controller: NVIDIA Corporation GK210GL [Tesla K80] (rev a1)
