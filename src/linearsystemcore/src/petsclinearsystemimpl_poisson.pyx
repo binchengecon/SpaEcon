@@ -3,7 +3,7 @@ from petsc4py.PETSc cimport Mat, PetscMat
 from petsc4py.PETSc import Error
 cimport numpy as np # this allows access to the data member
 
-cdef extern from "petsclinearsystem.h":
+cdef extern from "petsclinearsystem_poisson.h":
     ctypedef struct Params:
         double lambda_
     int FormLinearSystem_C(double *R, double *F, double *K, double *A, double *B_r, double *B_f_k, double *B_k, double *C_rr, double *C_ff, double *C_kk, double dt, double *lowerLims, double *upperLims, double *dVec, int *incVec, int n, PetscMat petsc_mat)
