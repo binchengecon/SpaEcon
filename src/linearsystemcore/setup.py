@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#$ python setup.py build_ext --inplace
+# $ python setup.py build_ext --inplace
 
 from distutils.core import setup
 from distutils.extension import Extension
@@ -9,6 +9,7 @@ from Cython.Build import cythonize
 import numpy
 import petsc4py
 
+
 def get_petsc_variables():
     """Get a list of PETSc environment variables from the file:
     $PETSC_DIR/$PETSC_ARCH/lib/petsc/conf/petscvariables
@@ -16,7 +17,7 @@ def get_petsc_variables():
     The result is memoized to avoid constantly reading the file.
     """
     import os
-    PETSC_DIR  = os.environ['PETSC_DIR']
+    PETSC_DIR = os.environ['PETSC_DIR']
     PETSC_ARCH = os.environ.get('PETSC_ARCH', '')
     path = [PETSC_DIR, PETSC_ARCH, "lib/petsc/conf/petscvariables"]
     variables_path = os.path.join(*path)
@@ -25,14 +26,15 @@ def get_petsc_variables():
         splitlines = (line.split("=", maxsplit=1) for line in fh.readlines())
     return {k.strip(): v.strip() for k, v in splitlines}
 
+
 def configure():
     INCLUDE_DIRS = []
     LIBRARY_DIRS = []
-    LIBRARIES    = []
+    LIBRARIES = []
 
     # PETSc
     import os
-    PETSC_DIR  = os.environ['PETSC_DIR']
+    PETSC_DIR = os.environ['PETSC_DIR']
     PETSC_ARCH = os.environ.get('PETSC_ARCH', '')
     from os.path import join, isdir
     if PETSC_ARCH and isdir(join(PETSC_DIR, PETSC_ARCH)):
@@ -40,7 +42,8 @@ def configure():
                          join(PETSC_DIR, 'include')]
         LIBRARY_DIRS += [join(PETSC_DIR, PETSC_ARCH, 'lib')]
     else:
-        if PETSC_ARCH: pass # XXX should warn ...
+        if PETSC_ARCH:
+            pass  # XXX should warn ...
         INCLUDE_DIRS += [join(PETSC_DIR, 'include')]
         LIBRARY_DIRS += [join(PETSC_DIR, 'lib')]
     LIBRARIES += ['petsc']
@@ -62,15 +65,16 @@ def configure():
         runtime_library_dirs=LIBRARY_DIRS,
     )
 
+
 extensions = [
-Extension('petsclinearsystem',
-              sources = ['src/petsclinearsystem.pyx',
-                         'src/petsclinearsystemimpl.c'],
-              depends = ['src/petsclinearsystem.h'],
+    Extension('petsclinearsystem_poisson',
+              sources=['src/petsclinearsystem_poisson.pyx',
+                       'src/petsclinearsystem_poisson.c'],
+              depends=['src/petsclinearsystem_poisson.h'],
               **configure()),
 ]
 
-setup(name = "petsclinearsystem",
-      ext_modules = cythonize(
+setup(name="petsclinearsystem_poisson",
+      ext_modules=cythonize(
           extensions, include_path=[petsc4py.get_include()]),
-)
+      )
