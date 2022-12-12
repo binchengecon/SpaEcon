@@ -67,14 +67,14 @@ def configure():
 
 
 extensions = [
-    Extension('petsclinearsystem_poisson',
+    Extension('petsclinearsystempoi',
               sources=['src/petsclinearsystem_poisson.pyx',
-                       'src/petsclinearsystem_poisson.c'],
+                       'src/petsclinearsystem_poissonimpl.c'],
               depends=['src/petsclinearsystem_poisson.h'],
               **configure()),
 ]
 
-setup(name="petsclinearsystem_poisson",
+setup(name="petsclinearsystempoi",
       ext_modules=cythonize(
           extensions, include_path=[petsc4py.get_include()]),
       )

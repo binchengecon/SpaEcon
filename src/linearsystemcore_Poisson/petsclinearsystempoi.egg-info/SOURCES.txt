@@ -1,0 +1,7 @@
+setup.py
+petsclinearsystempoi.egg-info/PKG-INFO
+petsclinearsystempoi.egg-info/SOURCES.txt
+petsclinearsystempoi.egg-info/dependency_links.txt
+petsclinearsystempoi.egg-info/top_level.txt
+src/petsclinearsystem_poisson.c
+src/petsclinearsystem_poissonimpl.c
